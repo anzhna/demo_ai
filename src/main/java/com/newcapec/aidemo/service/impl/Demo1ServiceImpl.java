@@ -31,6 +31,7 @@ public class Demo1ServiceImpl implements Demo1Service {
         // 在会话信息中添加用户新对话
         demoContext.addChatMessage(chatMessageUser);
         //调用接口——————————————————————————————————————————
+        return chatMessageUser;
     }
 }
 

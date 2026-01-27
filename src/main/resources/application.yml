@@ -1,0 +1,25 @@
+# 核心服务器配置
+
+server:
+  port: 8080             # 指定端口，写出来心里踏实
+  servlet:
+    context-path: /      # 项目根路径，默认就是 /，可以不写
+
+# Spring 框架配置
+
+spring:
+  application:
+    name: ai-demo-backend # 应用名
+
+  # 解决文件上传限制问题
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 50MB    # 单个文件最大 50MB (默认1MB)
+      max-request-size: 50MB # 整个请求最大 50MB
+
+# 日志配置
+logging:
+  level:
+    root: INFO
+    com.newcapec.aidemo: DEBUG

@@ -13,37 +13,27 @@ import java.util.Map;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChatResponse {
-    private int code;       // 1 成功 0 失败
-    private String msg;     // 错误信息
-    private ResponseData data; // 具体的业务数据
+public class ChatResponse<T> {
 
-    @Data
-    @Builder
-    public static class ResponseData {
-        // 响应类型: text, prompt_confirm, resource
-        private String type;
+    private Integer code; // 200, 500
+    private String msg;   // "success"
+    private T data;
 
-        // 展示内容
-        private String content;
-
-        // 资源ID (下载用)
-        private String resourceId;
-
-        // 当前状态: IDLE, WAITING_CONFIRM, FINISHED
-        private String status;
-
-        // 扩展元数据 (存放缩略图URL、调试信息等)
-        private Map<String, Object> meta;
+    // 成功时的构造工厂
+    public static <T> ChatResponse<T> success(T data) {
+        ChatResponse<T> response = new ChatResponse<>();
+        response.setCode(200);
+        response.setMsg("success");
+        response.setData(data);
+        return response;
     }
 
-    // 快速构建成功响应的静态方法
-    public static ChatResponse success(ResponseData data) {
-        return ChatResponse.builder().code(0).msg("success").data(data).build();
-    }
-
-    // 快速构建错误响应
-    public static ChatResponse error(int code, String msg) {
-        return ChatResponse.builder().code(code).msg(msg).build();
+    //错误时的构造工厂
+    public static <T> ChatResponse<T> error(T data) {
+        ChatResponse<T> response = new ChatResponse<>();
+        response.setCode(500);
+        response.setMsg("error");
+        response.setData(data);
+        return response;
     }
 }

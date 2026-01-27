@@ -7,28 +7,29 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "ai对话接口")
-@Controller
+@RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/v1")
+@CrossOrigin(origins = "*") //允许跨域
 public class DemoController {
 
     private final Demo1Service demo1Service;
 
     @Operation(summary = "ai对话接口",description = "用于确认aiDemo并对话")
-    @PostMapping("/dialogue")
+    @PostMapping("/chat/completions")
     public ChatResponse dialogue(
             @RequestHeader("X-Session-ID") String sessionId,
-            @PathVariable ChatRequest chatRequest) {
+            @RequestBody ChatRequest chatRequest) {
         String demoId = chatRequest.getDemoId();
         if (demoId == null) {
-            return ChatResponse.error(0,"系统错误");
+            return ChatResponse.error("系统错误,请刷新后重试");
         }
         if (demoId.equals("demo1")){
             demo1Service.createChatRequest(sessionId,chatRequest);
         }
+        return ChatResponse.success("成功");
     }
 }
