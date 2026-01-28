@@ -12,7 +12,7 @@ import java.util.List;
 public class ContextVO {
     // 历史消息列表
     private List<ChatMessage> history = new ArrayList<>();
-
+    
     public ContextVO(List<ChatMessage> history) {
         this.history = history;
     }

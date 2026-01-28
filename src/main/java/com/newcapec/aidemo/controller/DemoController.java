@@ -27,7 +27,7 @@ public class DemoController {
         if (demoId == null) {
             return ChatResponse.error("系统错误,请刷新后重试");
         }
-        if (demoId.equals("demo1")){
+        if (demoId.equals("demo_text")){
             demo1Service.createChatRequest(sessionId,chatRequest);
         }
         return ChatResponse.success("成功");

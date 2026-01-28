@@ -13,7 +13,8 @@ import java.util.List;
 @Tag(name = "历史记录相关接口")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1") //允许跨域
+@RequestMapping("/api/v1")
+@CrossOrigin(origins = "*") //允许跨域
 public class HistoryController {
 
     private final HistoryService historyService;
