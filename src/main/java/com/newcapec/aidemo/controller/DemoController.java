@@ -2,6 +2,7 @@ package com.newcapec.aidemo.controller;
 
 import com.newcapec.aidemo.domain.dto.ChatRequest;
 import com.newcapec.aidemo.domain.dto.ChatResponse;
+import com.newcapec.aidemo.domain.entity.ChatMessage;
 import com.newcapec.aidemo.service.Demo1Service;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,7 +29,8 @@ public class DemoController {
             return ChatResponse.error("系统错误,请刷新后重试");
         }
         if (demoId.equals("demo_text")){
-            demo1Service.createChatRequest(sessionId,chatRequest);
+            ChatMessage aiResponse = demo1Service.createChatRequest(sessionId, chatRequest);
+            return ChatResponse.success(aiResponse);
         }
         return ChatResponse.success("成功");
     }

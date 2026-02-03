@@ -41,9 +41,7 @@ public class HistoryServiceImpl implements HistoryService {
 
                 // 打包成 List 返回
                 .collect(Collectors.toList());
-
     }
-
     @Override
     public ContextVO getChat(String sessionId, String conversationId) {
         // 获取用户信息
